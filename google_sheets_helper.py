@@ -9,7 +9,7 @@ SCOPE = [
 ]
 
 # Replace with your downloaded credentials file name
-CREDENTIALS_FILE = "google-credentials.json"
+CREDENTIALS_FILE = ".streamlit/secrets.toml"#"google-credentials.json"
 
 SHEET_ID = "1rA8elO0f7gjkA1IoNgsDb62Sq5_wAR5gVyqvDjDS1oA"
 
