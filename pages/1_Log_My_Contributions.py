@@ -4,18 +4,12 @@ from google_sheets_helper import read_points, write_points
 from points_config import gsheetname, mentors_list, category_list, core_list, non_core_list, points_d
 from points_calculator import calculate_points
 from datetime import datetime
-
-from gspread_pandas import Spread,Client
-from streamlit_gsheets import GSheetsConnection
-
-
 from google.oauth2 import service_account
 
 
 @st.cache_data(ttl=600)
 def read_cached_points(gsheetname, refresh_time):
     return read_points(gsheetname)
-
 
 
 if st.session_state.get('last_refresh_time') is None:
@@ -56,7 +50,6 @@ if st.button("Submit"):
         st.success(f"You have been awarded {awarded_points} points for this activity.")
     else:
         st.error("Please fill in all fields before submitting.")
-
 
 
 
