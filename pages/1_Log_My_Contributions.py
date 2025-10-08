@@ -5,14 +5,17 @@ from points_config import gsheetname, mentors_list, category_list, core_list, no
 from points_calculator import calculate_points
 from datetime import datetime
 
+from gspread_pandas import Spread,Client
+from streamlit_gsheets import GSheetsConnection
+
+
+from google.oauth2 import service_account
+
 
 @st.cache_data(ttl=600)
 def read_cached_points(gsheetname, refresh_time):
     return read_points(gsheetname)
 
-st.title('Submit Points')
-core_list = points_d['Core'].keys()
-non_core_list = points_d['Non-Core'].keys()
 
 
 if st.session_state.get('last_refresh_time') is None:
@@ -53,3 +56,43 @@ if st.button("Submit"):
         st.success(f"You have been awarded {awarded_points} points for this activity.")
     else:
         st.error("Please fill in all fields before submitting.")
+
+
+
+
+
+# scope = [
+#     "https://spreadsheets.google.com/feeds",
+#     "https://www.googleapis.com/auth/spreadsheets",
+#     "https://www.googleapis.com/auth/drive.file",
+#     "https://www.googleapis.com/auth/drive"
+# ]
+# credentials = service_account.Credentials.from_service_account_info(
+#                 st.secrets["gcp_service_account"], scopes = scope)
+# client = Client(scope=scope,creds=credentials)
+# spreadsheetname = "Streamlit"
+# spread = Spread(spreadsheetname, client = client)
+
+# # Check the connection
+# st.write(spread.url)
+
+# spreadsheet = "1rA8elO0f7gjkA1IoNgsDb62Sq5_wAR5gVyqvDjDS1oA"
+# spreadsheet = "https://docs.google.com/spreadsheets/d/1rA8elO0f7gjkA1IoNgsDb62Sq5_wAR5gVyqvDjDS1oA/edit?gid=302539020#gid=302539020"
+
+# conn = st.connection("gsheets", type=GSheetsConnection)
+# df = conn.read(spreadsheet=st.secrets.connections.gsheets.spreadsheet)
+# st.write(df)
+
+# df = conn.create(
+#     spreadsheet=st.secrets.connections.gsheets.spreadsheet,
+#     worksheet="Example 1",
+#     data=df,
+# )
+
+# conn.update(worksheet='Streamlit', data=[{'Name':'Test','Points':10}])
+# st.write('done')
+
+
+# st.title('Submit Points')
+# core_list = points_d['Core'].keys()
+# non_core_list = points_d['Non-Core'].keys()
