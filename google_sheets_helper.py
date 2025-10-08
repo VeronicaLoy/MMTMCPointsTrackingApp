@@ -1,27 +1,5 @@
 import gspread
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
-
-
-
-def get_conn():
-    conn = st.connection("gsheets", type=GSheetsConnection)
-    # sheet = conn.read(worksheet=sheet_name, ttl='10m')
-    return conn
-
-def read_points(sheet_name: str):
-    # conn = st.connection("gsheets", type=GSheetsConnection)
-    conn = get_conn()
-    df = conn.read(spreadsheet=sheet_name)
-    return df
-
-def write_points(sheet_name: str, data):
-    conn = get_conn()
-    df = conn.update(worksheet=sheet_name, data=data)
-
-
-
-
 from oauth2client.service_account import ServiceAccountCredentials
 
 SCOPE = [
@@ -33,16 +11,17 @@ SCOPE = [
 
 # Replace with your downloaded credentials file name
 # CREDENTIALS_FILE = st.secrets["google-credentials"]["json"]#".streamlit/secrets.toml"#"google-credentials.json"
-# CREDENTIALS_FILE = "google-credentials.json"
+CREDENTIALS_FILE = "google-credentials.json"
 CREDS_DICT = st.secrets["google-credentials"]
 
 
 SHEET_ID = "1rA8elO0f7gjkA1IoNgsDb62Sq5_wAR5gVyqvDjDS1oA"
 
+st.write('hi')
 
 def get_sheet(sheet_name: str):
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(CREDS_DICT, SCOPE)
     # creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, SCOPE)
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(CREDS_DICT, SCOPE)
     client = gspread.authorize(creds)
     sheet = client.open_by_key(SHEET_ID).worksheet(sheet_name)
     return sheet
@@ -62,10 +41,3 @@ def write_points(sheet_name: str, data):
         # If data is a list of dicts
         rows = [list(row.values()) for row in data]
     sheet.append_rows(rows)
-    
-    sheet.append_rows(rows)
-    sheet.clear()
-    sheet.append(row(data))
-    sheet.append_row(list(data[0].keys()))
-    for row in data:
-        sheet.append_row(list(row.values()))
