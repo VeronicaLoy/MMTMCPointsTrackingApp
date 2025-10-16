@@ -20,7 +20,8 @@ sub_cat_color_map = dict(zip(core_list + non_core_list, core_colors + non_core_c
 df = read_points(gsheetname)
 df = pd.DataFrame(df)
 
-fig = px.bar(df, y="Mentor", x="Points", color="Sub-Category", barmode="stack",# pattern_shape="Category", 
+
+fig = px.bar(df.sort_values(by=['Category','Mentor'], ascending=[True,False]), y="Mentor", x="Points", color="Sub-Category", barmode="stack",# pattern_shape="Category", 
 color_discrete_map=sub_cat_color_map)
 
 
