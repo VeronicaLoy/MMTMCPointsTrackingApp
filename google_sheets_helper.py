@@ -17,8 +17,6 @@ CREDS_DICT = st.secrets["google-credentials"]
 
 SHEET_ID = "1rA8elO0f7gjkA1IoNgsDb62Sq5_wAR5gVyqvDjDS1oA"
 
-st.write('hi')
-
 def get_sheet(sheet_name: str):
     # creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, SCOPE)
     creds = ServiceAccountCredentials.from_json_keyfile_dict(CREDS_DICT, SCOPE)

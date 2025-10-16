@@ -7,11 +7,11 @@ from points_config import gsheetname, mentors_list, category_list, core_list, no
 st.title('View My Contributions')
 
 data = read_points(gsheetname)
-df = pd.DataFrame(data)
+df = pd.DataFrame(data).sort_values(by='Date', ascending=False)
 
 # TODO: put in a separate config file
 mentors_list = mentors_list
-mentor = st.selectbox('Filter by Mentor', mentors_list)
+mentor = st.selectbox('Filter by Mentor', sorted(mentors_list))
 
 if mentor:
     df_mentor = df[df['Mentor']==mentor]

@@ -5,22 +5,29 @@ from points_config import gsheetname, mentors_list, category_list, core_list, no
 from points_calculator import calculate_points
 from datetime import datetime
 from google.oauth2 import service_account
-
+import threading
 
 @st.cache_data(ttl=600)
 def read_cached_points(gsheetname, refresh_time):
     return read_points(gsheetname)
 
 
+# Initialize refresh time
 if st.session_state.get('last_refresh_time') is None:
     st.session_state['last_refresh_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-data = read_cached_points(gsheetname, st.session_state['last_refresh_time'])
-df = pd.DataFrame(data)
+# Create a global lock (only once)
+if 'lock' not in st.session_state:
+    st.session_state['lock'] = threading.Lock()
 
+lock = st.session_state['lock']
+
+with lock:
+    data = read_cached_points(gsheetname, st.session_state['last_refresh_time'])
+    df = pd.DataFrame(data)
 
 # with st.form("add_user_form"):
-mentor = st.selectbox("Name:", mentors_list)
+mentor = st.selectbox("Select Name: ", sorted(mentors_list), accept_new_options=True)
 category = st.radio("Category:", points_d.keys())
 subcat_keys = [k for k in points_d[category].keys() if k != 'Max']
 sub_category = st.radio("Sub-Category:", subcat_keys)
@@ -44,10 +51,11 @@ if st.button("Submit"):
             'Notes': notes,
             'Points': awarded_points
         }
-        write_points(gsheetname, [data])
-        st.session_state['last_refresh_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        st.balloons()
-        st.success(f"You have been awarded {awarded_points} points for this activity.")
+        with lock:
+            write_points(gsheetname, [data])
+            st.session_state['last_refresh_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            st.balloons()
+            st.success(f"You have been awarded {awarded_points} points for this activity.")
     else:
         st.error("Please fill in all fields before submitting.")
 

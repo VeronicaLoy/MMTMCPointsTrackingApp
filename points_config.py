@@ -2,16 +2,37 @@
 gsheetname = 'Streamlit'
 
 mentors_list = ['',
-        'Raymond',
-        'Michelle',
-        'Jeff',
-        'Veron',
-        'Hui Ying',
-        'Zhang Ye']
+'Jei Sim',
+'Dreamy',
+'Jeffrey',
+'Raymond',
+'Sophia',
+'Arva',
+'Barry',
+'Boon Han',
+'Chandran',
+'Chin Xia',
+'Kelvin',
+'Michell',
+'Prakash',
+'Qing Lin',
+'Renee',
+'Pei Shan',
+'Thomas',
+'Cheng',
+'Darrell',
+'Hui Ying',
+'Janty',
+'Mike',
+'Raymond',
+'Rebecca',
+'Rika',
+'Tavin',
+'Yuan Bin']
 
 category_list = ['Core', 'Non-Core']
 core_list = ['Mentoring','Speech','Roles']
-non_core_list = ['Marketing','Attendance','Misc']
+non_core_list = ['Retreat Marketing','Meeting Attendance','Misc']
 
 mentoring_d = {
     "Take on a mentee": {"Points": 2, "Max": 4},
@@ -40,9 +61,9 @@ attendance_d = {
     "Contest Supporter": {"Points": 1, "Max": 3},
     "AGM": {"Points": 1, "Max": 1},
     "Organize OPC": {"Points": 1, "Max": 2},
-    "Invite non-TM guests ot meeting": {"Points": 1, "Max": 3},
-    "Anniversary": {"Points": 1, "Max": 1},
-    "Guest to Member": {"Points": 1, "Max": 3},
+    "Invite non-TM guests to meeting": {"Points": 1, "Max": 3},
+    "Club Anniversary": {"Points": 1, "Max": 1},
+    "Convert Guest to Member": {"Points": 1, "Max": 3},
 }
 
 misc_d = {
@@ -76,10 +97,10 @@ core_d = {'Core':
 
 non_core_d = {
         'Non-Core':
-            {'Marketing': {
+            {'Retreat Marketing': {
                 'Activity': marketing_d,
                 'Max':9},
-            'Attendance': {
+            'Meeting Attendance': {
                 'Activity': attendance_d,
                 'Max':3},
             'Misc': {

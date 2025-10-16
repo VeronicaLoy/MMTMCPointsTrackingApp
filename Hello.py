@@ -14,8 +14,4 @@ st.set_page_config(
 
 st.write("# Welcome Mentors! 👋")
 
-st.write('Some instructions here..')
-
-st.write('Picture or info on point system.. ')
-
-
+st.write('This page is Under Construction...Stay Tuned!')
