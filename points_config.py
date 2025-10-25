@@ -26,7 +26,8 @@ mentors_list = ['',
 'Raymond',
 'Rebecca',
 'Rika',
-'Yuan Bin']
+'Yuan Bin',
+'Veronica']
 
 category_list = ['Core', 'Non-Core']
 core_list = ['Mentoring','Speech','Roles']
