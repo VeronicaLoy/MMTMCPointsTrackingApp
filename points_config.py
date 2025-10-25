@@ -4,14 +4,13 @@ gsheetname = 'Streamlit'
 mentors_list = ['',
 'Jei Sim',
 'Dreamy',
-'Jeffrey',
+'Jeffery',
 'Raymond',
 'Sophia',
 'Arva',
 'Barry',
 'Boon Han',
 'Chandran',
-'Chin Xia',
 'Kelvin',
 'Michell',
 'Prakash',
@@ -27,7 +26,6 @@ mentors_list = ['',
 'Raymond',
 'Rebecca',
 'Rika',
-'Tavin',
 'Yuan Bin']
 
 category_list = ['Core', 'Non-Core']
