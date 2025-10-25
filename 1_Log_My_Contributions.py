@@ -32,13 +32,15 @@ category = st.radio("Category:", points_d.keys())
 subcat_keys = [k for k in points_d[category].keys() if k != 'Max']
 sub_category = st.radio("Sub-Category:", subcat_keys)
 activity = st.radio("Activity:", points_d[category][sub_category]['Activity'].keys())
-notes = st.text_input("Notes (e.g. date, contribution):",
-                placeholder='E.g. On 5th Oct, I was the timer.')
+meeting_date = st.date_input("Select meeting date (if any)", value=None)
+meeting_date_str = meeting_date.strftime("%Y-%m-%d") if meeting_date else ''
+notes = st.text_input("Notes:",
+                placeholder='E.g. I went overtime, but only because my message was timeless.')
 
 activity_points = points_d[category][sub_category]['Activity'][activity]['Points']
 
-awarded_points = calculate_points(points_d, df, mentor, category, sub_category, activity,activity_points)
-st.write(f"Awarded Points (capped): {awarded_points}")
+awarded_points = calculate_points(points_d, df, mentor, category, sub_category, activity, meeting_date_str, activity_points)
+st.write(f"Points (capped): {awarded_points}")
 
 if st.button("Submit"):
     if mentor and category and sub_category and activity and notes:
@@ -48,6 +50,7 @@ if st.button("Submit"):
             'Category': category,
             'Sub-Category': sub_category,
             'Activity': activity,
+            'Meeting Date': meeting_date_str,
             'Notes': notes,
             'Points': awarded_points
         }
@@ -55,7 +58,8 @@ if st.button("Submit"):
             write_points(gsheetname, [data])
             st.session_state['last_refresh_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             st.balloons()
-            st.success(f"You have been awarded {awarded_points} points for this activity.")
+            st.success(f"Woohoo {mentor}! You have been awarded {awarded_points} point(s) for this activity.")
+            st.write(pd.DataFrame([data]))
     else:
         st.error("Please fill in all fields before submitting.")
 
