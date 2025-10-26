@@ -35,7 +35,7 @@ activity = st.radio("Activity:", points_d[category][sub_category]['Activity'].ke
 meeting_date = st.date_input("Select meeting date (if any)", value=None)
 meeting_date_str = meeting_date.strftime("%Y-%m-%d") if meeting_date else ''
 notes = st.text_input("Notes:",
-                placeholder='E.g. I went overtime, but only because my message was timeless.')
+                placeholder='E.g. With great power comes a great electric bill.')
 
 activity_points = points_d[category][sub_category]['Activity'][activity]['Points']
 
