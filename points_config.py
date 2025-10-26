@@ -57,12 +57,14 @@ roles_d = {
     "OPC Feedback": {"Points": 1, "Max": 1},
 }
 attendance_d = {
-    "Contest Supporter": {"Points": 1, "Max": 3},
     "AGM": {"Points": 1, "Max": 1},
     "Organize OPC": {"Points": 1, "Max": 2},
-    "Invite non-TM guests to meeting": {"Points": 1, "Max": 3},
     "Club Anniversary": {"Points": 1, "Max": 1},
+    "Contest Supporter": {"Points": 1, "Max": 3},
     "Convert Guest to Member": {"Points": 1, "Max": 3},
+    "Invite non-TM guests to meeting": {"Points": 1, "Max": 3},
+    "Dressed up and attended Diwali meeting": {"Points": 2, "Max": 2},
+    "Attended Diwali meeting": {"Points": 1, "Max": 1},
 }
 
 misc_d = {
